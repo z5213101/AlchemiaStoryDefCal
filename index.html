@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鍊金術物語 屬性防禦值計算</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h3 {
+            margin-top: 20px;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+        function getFinalDefense(baseDefValue, elementDefValue) {
+            var finalDefence = baseDefValue * (1 + Math.floor((elementDefValue / 10) * 0.05));
+            return finalDefence;
+        }
+        function calculateDefense() {
+            var physicalDefense = parseFloat(document.getElementById('physical_defense').value);
+            var magicalDefense = parseFloat(document.getElementById('magical_defense').value);
+            var fireDefense = parseFloat(document.getElementById('fire_defense').value);
+            var earthDefense = parseFloat(document.getElementById('earth_defense').value);
+            var waterDefense = parseFloat(document.getElementById('water_defense').value);
+            var windDefense = parseFloat(document.getElementById('wind_defense').value);
+
+            var firePhysicalDefense = getFinalDefense(physicalDefense, fireDefense);
+            var fireMagicalDefense = getFinalDefense(magicalDefense, fireDefense);
+            var earthPhysicalDefense = getFinalDefense(physicalDefense, earthDefense);
+            var earthMagicalDefense = getFinalDefense(magicalDefense, earthDefense);
+            var waterPhysicalDefense = getFinalDefense(physicalDefense, waterDefense);
+            var waterMagicalDefense = getFinalDefense(magicalDefense, waterDefense);
+            var windPhysicalDefense = getFinalDefense(physicalDefense, windDefense);
+            var windMagicalDefense = getFinalDefense(magicalDefense, windDefense);
+
+            document.getElementById('fire_physical_defense').innerHTML = firePhysicalDefense;
+            document.getElementById('fire_magical_defense').innerHTML = fireMagicalDefense;
+            document.getElementById('earth_physical_defense').innerHTML = earthPhysicalDefense;
+            document.getElementById('earth_magical_defense').innerHTML = earthMagicalDefense;
+            document.getElementById('water_physical_defense').innerHTML = waterPhysicalDefense;
+            document.getElementById('water_magical_defense').innerHTML = waterMagicalDefense;
+            document.getElementById('wind_physical_defense').innerHTML = windPhysicalDefense;
+            document.getElementById('wind_magical_defense').innerHTML = windMagicalDefense;
+        }
+    </script>
+</head>
+<body>
+    <h2>屬性防禦值計算器</h2>
+    <table>
+        <tr>
+            <th>名稱</th>
+            <th>數值</th>
+            <th>名稱</th>
+            <th>數值</th>
+        </tr>
+        <tr>
+            <td>物防：</td>
+            <td><input type="number" id="physical_defense"></td>
+            <td>魔防：</td>
+            <td><input type="number" id="magical_defense"></td>
+        </tr>
+        <tr>
+            <td>火防：</td>
+            <td><input type="number" id="fire_defense"></td>
+            <td>土防：</td>
+            <td><input type="number" id="earth_defense"></td>
+        </tr>
+        <tr>
+            <td>水防：</td>
+            <td><input type="number" id="water_defense"></td>
+            <td>風防：</td>
+            <td><input type="number" id="wind_defense"></td>
+        </tr>
+    </table>
+    <button onclick="calculateDefense()">計算</button><br><br>
+    <h3>各屬性最終防禦值：</h3>
+    <table>
+        <tr>
+            <th>屬性</th>
+            <th>物理防禦</th>
+            <th>魔法防禦</th>
+        </tr>
+        <tr>
+            <td>火</td>
+            <td><span id="fire_physical_defense"></span></td>
+            <td><span id="fire_magical_defense"></span></td>
+        </tr>
+        <tr>
+            <td>土</td>
+            <td><span id="earth_physical_defense"></span></td>
+            <td><span id="earth_magical_defense"></span></td>
+        </tr>
+        <tr>
+            <td>水</td>
+            <td><span id="water_physical_defense"></span></td>
+            <td><span id="water_magical_defense"></span></td>
+        </tr>
+        <tr>
+            <td>風</td>
+            <td><span id="wind_physical_defense"></span></td>
+            <td><span id="wind_magical_defense"></span></td>
+        </tr>
+    </table>
+    <a href="https://twitter.com/rplogin/status/1263799774655860736">計算方式參考</a>
+</body>
+</html>
